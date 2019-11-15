@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/upload" method="POST" enctype="multipart/form-data">
+
+  <div class="form-group">
+    <h1>Upload a picture of a cat... or not</h1>
+
+    <div class="fileUpload btn btn-primary">
+        <span>Select</span>
+        <input type="file" class="upload" name="image" id="image" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+
+
+</form>
+{% endblock %}

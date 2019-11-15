@@ -1,0 +1,51 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {% if title %}{{ title }} - Cat Not Cat{% else %}Welcome to Cat Not Cat{% endif %}
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+
+        {% block navbar %}
+        <div class="masthead clearfix">
+          <div class="inner">
+            <h3 class="masthead-brand">Cat / Not Cat</h3>
+            <nav>
+              <ul class="nav masthead-nav">
+                  <li class="active"><a href="{{ url_for('upload_image') }}">Upload</a></li>
+                  <li><a href="{{ url_for('about') }}">About</a></li>
+                </ul>
+            </nav>
+          </div>
+        </div>
+        {% endblock %}
+
+        <div class="inner cover">
+        {% block content %}
+          {% block app_content %}{% endblock %}
+        {% endblock %}
+        </div>
+    
+        {% block footer %}
+        <div class="mastfoot">
+          <div class="inner">
+            <p>An example of Machine Learning and DevOps by Jason Cabot, Microsoft.</p>
+          </div>
+        </div>
+        {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
