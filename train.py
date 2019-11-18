@@ -9,6 +9,7 @@ import os
 
 IMAGE_SIZE = 256
 IMAGE_DIRECTORY = './data/test_set'
+NUMBER_OF_EPOCHS = 10
 
 def label_img(name):
   if name == 'cats': return np.array([1, 0])
@@ -70,5 +71,5 @@ print('creating model')
 model = create_model()
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 print('training model')
-model.fit(training_images, training_labels, batch_size=50, epochs=10, verbose=1)
+model.fit(training_images, training_labels, batch_size=50, epochs=NUMBER_OF_EPOCHS, verbose=1)
 model.save("model.h5")
