@@ -68,7 +68,7 @@ stages:
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'dev-catnotcat-dev-1574110897431'
-                namespace: 'default'
+                namespace: 'dev'
                 manifests: '$(Pipeline.Workspace)/api-deployment.yaml'
                 containers: 'catnotcat.azurecr.io/jasoncabotmscatnotcat:$(Build.BuildId)'
 - stage: DeployStaging
@@ -91,7 +91,7 @@ stages:
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'staging-catnotcat-staging-1574110945185'
-                namespace: 'default'
+                namespace: 'staging'
                 manifests: '$(Pipeline.Workspace)/api-deployment.yaml'
                 containers: 'catnotcat.azurecr.io/jasoncabotmscatnotcat:$(Build.BuildId)'
 - stage: DeployProd
@@ -114,6 +114,6 @@ stages:
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'prod-catnotcat-prod-1574110997641'
-                namespace: 'default'
+                namespace: 'prod'
                 manifests: '$(Pipeline.Workspace)/api-deployment.yaml'
                 containers: 'catnotcat.azurecr.io/jasoncabotmscatnotcat:$(Build.BuildId)'
