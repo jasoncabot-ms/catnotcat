@@ -26,8 +26,11 @@ stages:
     - task: DownloadPipelineArtifact@2
       displayName: "Download Training Data"
       inputs:
-        pipelineId: "data"
-        artifactName: data
+        buildType: 'specific'
+        project: 'd94fc176-cdf1-44e9-a9a2-5ef29d1d995c'
+        definition: '7'
+        specificBuildWithTriggering: true
+        buildVersionToDownload: 'latest'
         targetPath: '$(System.DefaultWorkingDirectory)/data'
     - task: Bash@3
       displayName: 'Train Machine Model'
