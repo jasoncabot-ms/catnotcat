@@ -25,6 +25,7 @@ stages:
       displayName: "Download Training Data"
       inputs:
         buildType: 'current'
+        pipelineId: "data"
         artifactName: data
         targetPath: '$(System.DefaultWorkingDirectory)/data'
     - task: Bash@3
