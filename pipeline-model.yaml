@@ -4,6 +4,8 @@
 # https://aka.ms/yaml
 
 resources: 
+  repositories:
+   - repository: self
   pipelines:
   - pipeline: "data"
     source: catnotcat.data
@@ -11,8 +13,6 @@ resources:
       branches:  
         include:  
         - master
-
-pool: "Machine Learning"
 
 # Build Model
 stages:
@@ -24,7 +24,6 @@ stages:
     - task: DownloadPipelineArtifact@2
       displayName: "Download Training Data"
       inputs:
-        buildType: 'current'
         pipelineId: "data"
         artifactName: data
         targetPath: '$(System.DefaultWorkingDirectory)/data'
