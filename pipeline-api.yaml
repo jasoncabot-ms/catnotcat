@@ -27,8 +27,9 @@ stages:
     steps:
     - task: DownloadPipelineArtifact@2
       inputs:
-        pipelineId: "model"
         buildType: 'current'
+        specificBuildWithTriggering: true
+        buildVersionToDownload: 'latest'
         itemPattern: 'model.h5'
         targetPath: '$(Build.SourcesDirectory)/'
     - task: Docker@2
