@@ -1,6 +1,14 @@
 # Builds the web api and trained model into a container
 
-trigger: none
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - pipeline-api.yaml
+      - manifests/*
+      - catnotcat/*
 
 resources: 
   repositories:
