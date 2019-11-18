@@ -29,7 +29,6 @@ stages:
       inputs:
         buildType: 'current'
         buildVersionToDownload: 'latest'
-        artifactName: 'model'
         targetPath: '$(Build.SourcesDirectory)'
         specificBuildWithTriggering: true
     - task: Docker@2
