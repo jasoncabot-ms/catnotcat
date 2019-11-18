@@ -1,0 +1,24 @@
+# Used to convert Blob Storage data into a Pipeline Artifact
+
+trigger: none
+
+stages:
+- stage: retrievedata
+  jobs:
+  - job: 'GetData'
+    pool: "Machine Learning"
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Download Training Data'
+      inputs:
+        azureSubscription: 'Jason Personal AIRs Subscription(04fe963c-dced-4688-9372-1be7f86c986f)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          mkdir data
+          az storage blob download-batch -d $(System.DefaultWorkingDirectory)/data/ -s data --account-name catnotcat
+    - task: PublishPipelineArtifact@1
+      displayName: "Convert to Pipeline Artifact"
+      inputs:
+        path: $(System.DefaultWorkingDirectory)/data
+        artifact: data
