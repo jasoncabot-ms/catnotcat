@@ -43,3 +43,77 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(Build.BuildId)
+    - task: PublishPipelineArtifact@1
+      displayName: "Publish Kubernetes Manifest"
+      inputs:
+        path: 'manifests'
+        artifact: manifests
+- stage: DeployDev
+  displayName: 'Deploy API to Dev Environment'
+  jobs:
+  - deployment: 'Dev'
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: DownloadPipelineArtifact@1
+              inputs:
+                buildType: 'current'
+                artifactName: 'manifests'
+                targetPath: '$(Pipeline.Workspace)'
+            - task: KubernetesManifest@0
+              inputs:
+                action: 'deploy'
+                kubernetesServiceConnection: 'dev-catnotcat-dev-1574110897431'
+                namespace: 'default'
+                manifests: '$(Pipeline.Workspace)/api-deployment.yaml'
+                containers: 'catnotcat.azurecr.io/jasoncabotmscatnotcat:$(Build.BuildId)'
+- stage: DeployStaging
+  displayName: 'Promote API to Staging Environment'
+  jobs:
+  - deployment: 'Staging'
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: staging
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: DownloadPipelineArtifact@1
+              inputs:
+                buildType: 'current'
+                artifactName: 'manifests'
+                targetPath: '$(Pipeline.Workspace)'
+            - task: KubernetesManifest@0
+              inputs:
+                action: 'deploy'
+                kubernetesServiceConnection: 'staging-catnotcat-staging-1574110945185'
+                namespace: 'default'
+                manifests: '$(Pipeline.Workspace)/api-deployment.yaml'
+                containers: 'catnotcat.azurecr.io/jasoncabotmscatnotcat:$(Build.BuildId)'
+- stage: DeployProd
+  displayName: 'Promote API to Production Environment'
+  jobs:
+  - deployment: 'Production'
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: prod
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: DownloadPipelineArtifact@1
+              inputs:
+                buildType: 'current'
+                artifactName: 'manifests'
+                targetPath: '$(Pipeline.Workspace)'
+            - task: KubernetesManifest@0
+              inputs:
+                action: 'deploy'
+                kubernetesServiceConnection: 'prod-catnotcat-prod-1574110997641'
+                namespace: 'default'
+                manifests: '$(Pipeline.Workspace)/api-deployment.yaml'
+                containers: 'catnotcat.azurecr.io/jasoncabotmscatnotcat:$(Build.BuildId)'

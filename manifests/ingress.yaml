@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prod
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+    - 52.155.222.99.nip.io
+    secretName: prod-tls-secret
+  rules:
+  - host: 52.155.222.99.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: catnotcat
+          servicePort: 80
+        path: /
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: staging
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+    - staging.52.155.222.99.nip.io
+    secretName: staging-tls-secret
+  rules:
+  - host: staging.52.155.222.99.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: catnotcat-staging
+          servicePort: 80
+        path: /
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+    - dev.52.155.222.99.nip.io
+    secretName: dev-tls-secret
+  rules:
+  - host: dev.52.155.222.99.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: catnotcat-dev
+          servicePort: 80
+        path: /

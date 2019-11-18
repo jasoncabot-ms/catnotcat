@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catnotcat
+spec:
+  selector:
+      matchLabels:
+        app: catnotcat
+  replicas: 2
+  template:
+      metadata:
+        labels:
+            app: catnotcat
+      spec:
+        containers:
+        - name: catnotcat
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 5000

@@ -1,3 +1,6 @@
+data
+manifests
+train.*
 venv
 __pycache__
 catnotcat/__pycache__
