@@ -1,5 +1,7 @@
 # Builds the web api and trained model into a container
 
+trigger: none
+
 resources: 
   repositories:
    - repository: self
