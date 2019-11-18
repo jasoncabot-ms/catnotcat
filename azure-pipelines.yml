@@ -20,9 +20,20 @@ stages:
   jobs:
   - job: 'BuildModel'
     pool: "Machine Learning"
-    steps:    
-    - script: ./train.sh
+    steps:
+    - task: DownloadPipelineArtifact@2
+      displayName: "Download Training Data"
+      inputs:
+        buildType: 'current'
+        artifactName: data
+        targetPath: '$(System.DefaultWorkingDirectory)/data'
+    - task: Bash@3
       displayName: 'Train Machine Model'
+      inputs:
+        targetType: 'inline'
+        script: |
+          chmod +x train.sh
+          ./train.sh
     - task: PublishPipelineArtifact@1
       displayName: "Publish Model"
       inputs:
