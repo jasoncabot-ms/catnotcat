@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 data
+loadtest/results.json
 model.h5
