@@ -104,7 +104,7 @@ stages:
               inputs:
                 buildType: 'current'
                 artifactName: 'loadtest'
-                targetPath: '$(Pipeline.Workspace)'
+                targetPath: '$(Build.SourcesDirectory)'
             - task: Bash@3
               displayName: "Run load test on dev"
               inputs:
