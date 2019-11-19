@@ -23,7 +23,6 @@ resources:
 
 variables:
   dockerRegistryServiceConnection: '1282d892-cc76-4458-ad8d-bddcb35089c0'
-  alertMonitorServiceConnection: 'Jason Personal AIRs Subscription(04fe963c-dced-4688-9372-1be7f86c986f)'
   
 stages:
 - stage: Build
@@ -97,12 +96,6 @@ stages:
               displayName: "Run load test on dev"
               inputs:
                 filePath: 'loadtest/run.sh'
-            - task: AzureMonitor@1
-              displayName: "Check alerts on dev"
-              inputs:
-                connectedServiceNameARM: $(alertMonitorServiceConnection)
-                ResourceGroupName: 'mlops'
-                filterType: 'none'
             - task: DownloadPipelineArtifact@1
               displayName: "Download manifest"
               inputs:
