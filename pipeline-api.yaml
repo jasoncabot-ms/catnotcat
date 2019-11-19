@@ -104,11 +104,15 @@ stages:
               inputs:
                 buildType: 'current'
                 artifactName: 'loadtest'
-                targetPath: '$(Build.SourcesDirectory)'
+                targetPath: '$(Build.SourcesDirectory)/loadtest'
             - task: Bash@3
               displayName: "Run load test on dev"
               inputs:
                 filePath: 'loadtest/run.sh'
+                arguments: '$(Build.BuildId) "$WORKSPACE_ID" "$WORKSPACE_KEY"'
+              env:
+                WORKSPACE_ID: $(workspaceId)
+                WORKSPACE_KEY: $(workspaceKey)
             - task: DownloadPipelineArtifact@1
               displayName: "Download manifest"
               inputs:
