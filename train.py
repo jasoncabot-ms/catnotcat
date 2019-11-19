@@ -9,7 +9,7 @@ import os
 
 IMAGE_SIZE = 256
 IMAGE_DIRECTORY = './data/test_set'
-NUMBER_OF_EPOCHS = 10
+NUMBER_OF_EPOCHS = 1
 
 def label_img(name):
   if name == 'cats': return np.array([1, 0])
