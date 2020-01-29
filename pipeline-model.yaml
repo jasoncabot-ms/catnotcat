@@ -29,7 +29,7 @@ stages:
 - stage: buildmodel
   jobs:
   - job: 'BuildModel'
-    pool: "Machine Learning"
+    pool: "Azure Pipelines"
     steps:
     - task: DownloadPipelineArtifact@2
       displayName: "Download Training Data"
