@@ -15,6 +15,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
+          mkdir -p /var/shared/data/
           az storage blob download-batch -d /var/shared/data/ -s data --account-name catnotcat
     - task: PublishPipelineArtifact@1
       displayName: "Convert to Pipeline Artifact"
