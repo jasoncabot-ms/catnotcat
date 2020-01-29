@@ -29,7 +29,8 @@ stages:
 - stage: buildmodel
   jobs:
   - job: 'BuildModel'
-    pool: "Azure Pipelines"
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
     - task: DownloadPipelineArtifact@2
       displayName: "Download Training Data"
