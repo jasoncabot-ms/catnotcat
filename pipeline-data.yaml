@@ -6,7 +6,7 @@ stages:
 - stage: retrievedata
   jobs:
   - job: 'GetData'
-    pool: "Machine Learning"
+    pool: "Azure Pipelines"
     steps:
     - task: AzureCLI@2
       displayName: 'Download Training Data'
