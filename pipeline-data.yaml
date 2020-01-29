@@ -1,12 +1,12 @@
 # Used to convert Blob Storage data into a Pipeline Artifact
 
 trigger: none
-
 stages:
 - stage: retrievedata
   jobs:
   - job: 'GetData'
-    pool: "Azure Pipelines"
+    pool:
+      vmImage: ubuntu-16.04
     steps:
     - task: AzureCLI@2
       displayName: 'Download Training Data'
